@@ -25,5 +25,5 @@ class FoodRes(Resource):
         rate = body.rate
         food = Food(name=name, url=url, coint_new=coint_new, coint_old=coint_old, cout_rate=cout_rate, rate=rate)
         food.save()
-        add_food=Food.objects().with_id(food.id)
-        return mlab.item2json(food)
+        add_food = Food.objects().with_id(food.id)
+        return mlab.item2json(add_food)

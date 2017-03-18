@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 import mlab
 from model.food import Food
+from model.user import User
 from flask_jwt import JWT, jwt_required
 
 class UserRestList(Resource):

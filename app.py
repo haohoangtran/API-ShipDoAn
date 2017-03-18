@@ -3,13 +3,23 @@ import mlab
 from flask_restful import Resource,Api
 from resouce.food_res import FoodRest,FoodRestList,UserRestList
 from flask_jwt import JWT, jwt_required
+from model.food import Food
+from model.user import User
 
 mlab.connect()
 
 app = Flask(__name__)
 api = Api(app)
+app.config["SECRET_KEY"]="SHIP DO AN DEM"
+# user = User(username = "khanh", password = "pham")
+# user.save()
 
+api.add_resource(FoodRestList,"/food")
+api.add_resource(FoodRest,"/food/<food_id>")
+api.add_resource(UserRestList,"/register")
 
+for user in User.objects():
+    print(mlab.item2json(user))
 
 class LoginCredentials(Resource):
     def __init__(self, id, username, password):
@@ -36,10 +46,6 @@ class LoginCredentials(Resource):
 def hello_world():
     return 'Hello to ship do an nhanh app'
 
-
-api.add_resource(FoodRestList,"/food")
-api.add_resource(FoodRest,"/food/<food_id>")
-api.add_resource(UserRestList,"/register")
 
 @app.after_request
 def apply_caching(response):

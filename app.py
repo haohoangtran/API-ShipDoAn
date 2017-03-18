@@ -47,10 +47,10 @@ def hello_world():
     return 'Hello to ship do an nhanh app'
 
 
-@app.after_request
-def apply_caching(response):
-    response.headers["X-Frame-Options"] = "SAMEORIGIN"
-    return response
+# @app.after_request
+# def apply_caching(response):
+#     response.headers["X-Frame-Options"] = "SAMEORIGIN"
+#     return response
 
 if __name__ == '__main__':
     app.run()

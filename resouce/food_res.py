@@ -27,12 +27,12 @@ class UserRestList(Resource):
 
 class FoodRestList(Resource):
 
-    @jwt_required()
+
     def get(self):
         food = Food.objects()
         return mlab.item2json(food)
 
-    @jwt_required()
+
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument(name="name", type=str, location="json")
@@ -54,13 +54,13 @@ class FoodRestList(Resource):
         return mlab.item2json(add_food)
 
 class FoodRest(Resource):
-    @jwt_required()
+
     def get(selfk,food_id):
         food = Food.objects().with_id(food_id)
         return mlab.item2json(food)
 
 
-    @jwt_required()
+
     def delete(self,food_id):
         food = Food.objects().with_id(food_id)
         food.delete()

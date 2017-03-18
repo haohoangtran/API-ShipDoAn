@@ -10,16 +10,14 @@ import mlab
 app = Flask(__name__)
 api = Api(app)
 
+
 app.config["SECRET_KEY"]="SHIP DO AN DEM"
 
-JWT_AUTH = {
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3600)
-}
 
 mlab.connect()
 
-food = Food(name = "VIT OM SAU", url = "www.facebook.com",coint_old = "bitcoint", coint_new = "cointnew", cout_rate = 9, rate = 0.85)
-food.save()
+# food = Food(name = "VIT OM SAU", url = "www.facebook.com",coint_old = "bitcoint", coint_new = "cointnew", cout_rate = 9, rate = 0.85)
+# food.save()
 
 for food in Food.objects():
     # food.delete()

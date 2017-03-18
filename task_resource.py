@@ -37,7 +37,7 @@ class TaskListRest(Resource):
         parser = reqparse.RequestParser()
 
         parser.add_argument(name="name", type=str, location="json")
-        parser.add_argument(name="url", type=float, location="json")
+        parser.add_argument(name="url", type=str, location="json")
         parser.add_argument(name ="coint_old", type = str, location = "json")
         parser.add_argument(name = "coint_new", type = str, location = "json")
         parser.add_argument(name = "cout_rate", type = int, location = "json")
@@ -75,7 +75,7 @@ class TaskRes(Resource):
         parser = reqparse.RequestParser()
 
         parser.add_argument(name="name", type=str, location="json")
-        parser.add_argument(name="url", type=float, location="json")
+        parser.add_argument(name="url", type=str, location="json")
         parser.add_argument(name="coint_old", type=str, location="json")
         parser.add_argument(name="coint_new", type=str, location="json")
         parser.add_argument(name="cout_rate", type=int, location="json")

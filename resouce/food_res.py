@@ -23,7 +23,8 @@ class UserRestList(Resource):
         user = User(username=username, password=password, address=address, spend=spend)
         user.save()
 
-        return mlab.itemjson(user)
+        return mlab.item2json(user)
+
 
 
 class FoodRestList(Resource):
@@ -88,5 +89,5 @@ class FoodRest(Resource):
         food = Food.objects().with_id(food_id)
         food.update(name=name, url=url, coint_new=coint_new, coint_old=coint_old, cout_rate=cout_rate, rate=rate)
 
-        add_food = Food.objects().with_id(food.food_id)
+        add_food = Food.objects().with_id(food_id)
         return mlab.item2json(add_food)

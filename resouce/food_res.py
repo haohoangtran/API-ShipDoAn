@@ -6,6 +6,7 @@ from model.order import Order
 from flask_jwt import JWT, jwt_required
 
 class UserRestList(Resource):
+
     def post(self):
         parser = reqparse.RequestParser()
 
@@ -13,6 +14,7 @@ class UserRestList(Resource):
         parser.add_argument(name="password", type=str, location="json")
         parser.add_argument(name="address", type=str, location="json")
         parser.add_argument(name="spend", type=float, location="json")
+        parser.add_argument(name="total_spend", type=float, location="json")
 
         body = parser.parse_args()
 
@@ -20,12 +22,69 @@ class UserRestList(Resource):
         password = body["password"]
         address = body["address"]
         spend = body["spend"]
+        total_spend = body["total_spend"]
 
-        user = User(username=username, password=password, address=address, spend=spend)
+        user = User(username=username, password=password, address=address, spend=spend, total_spend = total_spend)
         user.save()
 
         return mlab.item2json(user)
 
+
+    def get(self):
+        user = User.objects();
+        return mlab.item2json(user)
+
+class UserRestFacebookList(Resource):
+    def post(self):
+        parser = reqparse.RequestParser()
+
+        parser.add_argument(name="username", type=str, location="json")
+        parser.add_argument(name="password", type=str, location="json")
+        parser.add_argument(name="address", type=str, location="json")
+        parser.add_argument(name="spend", type=float, location="json")
+        parser.add_argument(name="total_spend", type=float, location="json")
+
+        body = parser.parse_args()
+
+        username = body["username"]
+        password = body["password"]
+        address = body["address"]
+        spend = body["spend"]
+        total_spend = body["total_spend"]
+
+
+        user = User(username=username, password=password, address=address, spend=spend, total_spend=total_spend)
+        user.save()
+
+        return mlab.item2json(user)
+
+
+class UserRest(Resource):
+    def get(self,user_id):
+        user = User.objects().with_id(user_id);
+        return mlab.item2json(user);
+
+    def put(self,user_id):
+        parser = reqparse.RequestParser();
+        parser.add_argument(name="username", type=str, location="json")
+        # parser.add_argument(name="password", type=str, location="json")
+        # parser.add_argument(name="address", type=str, location="json")
+        parser.add_argument(name="spend", type=float, location="json")
+
+        body = parser.parse_args()
+
+        username = body["username"]
+        # password = body["password"]
+        # address = body["address"]
+        spend = body["spend"]
+
+        user = User.objects().with_id(user_id)
+        total_spend_last = user.total_spend;
+
+        user.update(username=username, total_spend=spend+total_spend_last);
+
+        user_update = User.objects().with_id(user_id)
+        return mlab.item2json(user_update)
 
 
 class FoodRestList(Resource):
@@ -33,7 +92,7 @@ class FoodRestList(Resource):
 
     def get(self):
         food = Food.objects()
-        return mlab.item2json(food)
+        return mlab.list2json(food)
 
 
     def post(self):

@@ -4,4 +4,5 @@ class User(Document):
     username = StringField();
     password = StringField();
     address = StringField();
+    total_spend = FloatField();
     spend = FloatField();

@@ -1,11 +1,11 @@
 from flask import Flask
 import mlab
 from flask_restful import Resource,Api
-from resouce.food_res import FoodRest,FoodRestList,UserRestList
+from resouce.food_res import FoodRest,FoodRestInfo,FoodRestList,UserRestList, OrderRestList,  OrderRest
 from flask_jwt import JWT, jwt_required
 from model.food import Food
 from model.user import User
-
+from model.order import Order
 mlab.connect()
 
 app = Flask(__name__)
@@ -16,8 +16,10 @@ app.config["SECRET_KEY"]="SHIP DO AN DEM"
 
 api.add_resource(FoodRestList,"/food")
 api.add_resource(FoodRest,"/food/<food_id>")
+api.add_resource(FoodRestInfo,"/food/info/<food_id>")
 api.add_resource(UserRestList,"/register")
-
+api.add_resource(OrderRestList,"/order")
+api.add_resource(OrderRest,"/order/<order_id>")
 
 for user in User.objects():
     print(mlab.item2json(user))

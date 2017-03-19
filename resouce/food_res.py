@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse
 import mlab
 from model.food import Food
 from model.user import User
+from model.order import Order
 from flask_jwt import JWT, jwt_required
 
 class UserRestList(Resource):
@@ -55,12 +56,18 @@ class FoodRestList(Resource):
         add_food = Food.objects().with_id(food.id)
         return mlab.item2json(add_food)
 
-class FoodRest(Resource):
+class FoodRestInfo(Resource):
 
     def get(selfk,food_id):
         food = Food.objects().with_id(food_id)
         return mlab.item2json(food)
 
+
+class FoodRest(Resource):
+
+    def get(selfk,food_id):
+        food = Food.objects().with_id(food_id)
+        return mlab.item2json(food)
 
 
     def delete(self,food_id):
@@ -73,21 +80,76 @@ class FoodRest(Resource):
 
     def put(self,food_id):
         parser = reqparse.RequestParser()
-        parser.add_argument(name="name", type=str, location="json")
-        parser.add_argument(name="url", type=str, location="json")
-        parser.add_argument(name="coint_old", type=str, location="json")
-        parser.add_argument(name="coint_new", type=str, location="json")
-        parser.add_argument(name="cout_rate", type=int, location="json")
         parser.add_argument(name="rate", type=float, location="json")
         body = parser.parse_args()
-        name = body.name
-        url = body.url
-        coint_old = body.coint_old
-        coint_new = body.coint_new
-        cout_rate = body.cout_rate
-        rate = body.rate
+        # name = body.name
+        # url = body.url
+        # coint_old = body.coint_old
+        # coint_new = body.coint_new
+        # cout_rate = body.cout_rate
+        rate_res = body.rate
         food = Food.objects().with_id(food_id)
-        food.update(name=name, url=url, coint_new=coint_new, coint_old=coint_old, cout_rate=cout_rate, rate=rate)
-
+        cout_rate=food.cout_rate
+        rate=food.rate
+        rate_new=(cout_rate*rate +rate_res)/(cout_rate+1)
+        food.update( cout_rate=cout_rate+1, rate=rate_new)
         add_food = Food.objects().with_id(food_id)
         return mlab.item2json(add_food)
+
+class OrderRestList(Resource):
+    def get(self):
+        order_list = Order.objects()
+        return mlab.list2json(order_list)
+
+    def post(self):
+        parser = reqparse.RequestParser()
+
+        parser.add_argument(name = "username", type = str, location = "json")
+        parser.add_argument(name = "userid", type = str, location = "json")
+        parser.add_argument(name = "food_name", type = str, location = "json")
+        parser.add_argument(name = "orderdate", type = str, location = "json")
+        parser.add_argument(name = "rate", type = float, location = "json")
+
+        body = parser.parse_args()
+
+        username = body.username
+        userid = body.userid
+        food_name = body.food_name
+        orderdate = body.orderdate
+        rate = body.rate
+
+        order = Order(username = username, userid = userid, food_name = food_name, orderdate = orderdate, rate = rate)
+        order.save()
+
+        return mlab.item2json(order)
+
+class OrderRest(Resource):
+    def get(self,order_id):
+        order = Order.objects().with_id(order_id)
+        return mlab.item2json(order)
+
+
+    def put(self,order_id):
+        parser = reqparse.RequestParser()
+
+        parser.add_argument(name = "username", type = str, location = "json")
+        parser.add_argument(name = "userid", type = str, location = "json")
+        parser.add_argument(name = "food_name", type = str, location = "json")
+        parser.add_argument(name = "orderdate", type = str, location = "json")
+        parser.add_argument(name = "rate", type = float, location = "json")
+
+        body = parser.parse_args()
+
+        username = body.username
+        userid = body.userid
+        food_name = body.food_name
+        orderdate = body.orderdate
+        rate = body.rate
+
+        order = Order.objects().with_id(order_id)
+        order.update(username = username, userid = userid, food_name = food_name, orderdate = orderdate, rate = rate)
+
+        return mlab.item2json(order)
+
+
+

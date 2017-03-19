@@ -4,7 +4,7 @@
 flask
 flask-restful
 flask-jwt
-
+pyfcm
 
 # ----------------------
 # Testing

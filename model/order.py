@@ -4,6 +4,6 @@ class Order(Document):
     username = StringField();
     userid = StringField();
     food_name = StringField();
-    orderdate = DateTimeField();
+    orderdate = StringField();
     rate = FloatField();
-    food_number = FloatField();
+    food_number = IntField();

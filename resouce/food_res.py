@@ -168,6 +168,7 @@ class OrderRestList(Resource):
         parser.add_argument(name = "food_name", type = str, location = "json")
         parser.add_argument(name = "orderdate", type = str, location = "json")
         parser.add_argument(name = "rate", type = float, location = "json")
+        parser.add_argument(name = "food_number", type = int, location = "json")
 
         body = parser.parse_args()
 
@@ -176,8 +177,9 @@ class OrderRestList(Resource):
         food_name = body.food_name
         orderdate = body.orderdate
         rate = body.rate
+        food_number = body.food_number
 
-        order = Order(username = username, userid = userid, food_name = food_name, orderdate = orderdate, rate = rate)
+        order = Order(username = username, userid = userid, food_name = food_name, orderdate = orderdate, rate = rate, food_number = food_number)
         order.save()
 
         return mlab.item2json(order)
@@ -196,7 +198,7 @@ class OrderRest(Resource):
         parser.add_argument(name = "food_name", type = str, location = "json")
         parser.add_argument(name = "orderdate", type = str, location = "json")
         parser.add_argument(name = "rate", type = float, location = "json")
-        parser.add_argument(name = "food_number", type = float, location = "json")
+        parser.add_argument(name = "food_number", type = int, location = "json")
 
         body = parser.parse_args()
 

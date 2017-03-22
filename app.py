@@ -18,7 +18,7 @@ api.add_resource(FoodRestList,"/food")
 api.add_resource(FoodRest,"/food/<food_id>")
 api.add_resource(FoodRestInfo,"/food/info/<food_id>")
 api.add_resource(UserRestList,"/users")
-api.add_resource(UserINFRest,"/user/info/<user_id>")
+api.add_resource(UserINFRest,"/userinfo/<user_id>")
 
 api.add_resource(UserRestFacebookList,"/users/facbook")
 api.add_resource(UserRest,"/users/spend/<user_id>")

@@ -108,10 +108,12 @@ class UserINFRest(Resource):
         user = UserINF(username=username, address=address, phone_number=phone_number)
         user.save()
 
+        add_user = UserINF.objects.with_id(userInfo_id)
+
         # user = UserINF.objects().with_id(userInfo_id)
         # user.update(username=username, address=address, phone_number=phone_number);
 
-        return mlab.item2json(user)
+        return mlab.item2json(add_user)
 
 
 

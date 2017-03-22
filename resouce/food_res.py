@@ -105,10 +105,10 @@ class UserINFRest(Resource):
         address = body["address"]
         phone_number = body["phone_number"]
 
-        user = User(username=username, address=address, phone_number=phone_number)
+        user = UserINF(username=username, address=address, phone_number=phone_number)
         user.save()
 
-        return mlab.item2json(user_update)
+        return mlab.item2json(user)
 
 
 

@@ -3,6 +3,7 @@ import mlab
 from model.food import Food
 from model.user import User
 from model.order import Order
+from model.userInf import UserINF
 from flask_jwt import JWT, jwt_required
 
 class UserRestList(Resource):
@@ -85,6 +86,30 @@ class UserRest(Resource):
 
         user_update = User.objects().with_id(user_id)
         return mlab.item2json(user_update)
+
+
+class UserINFRest(Resource):
+    def get(self,user_id):
+        user = UserINF.objects().with_id(user_id);
+        return mlab.item2json(user);
+
+    def put(self,user_id):
+        parser = reqparse.RequestParser();
+        parser.add_argument(name="username", type=str, location="json")
+        parser.add_argument(name="address", type=str, location="json")
+        parser.add_argument(name="phone_number", type=str, location="json")
+
+        body = parser.parse_args()
+
+        username = body["username"]
+        address = body["address"]
+        phone_number = body["phone_number"]
+
+        user = User(username=username, address=address, phone_number=phone_number)
+        user.save()
+
+        return mlab.item2json(user_update)
+
 
 
 class FoodRestList(Resource):

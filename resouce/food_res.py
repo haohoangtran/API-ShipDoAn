@@ -93,7 +93,7 @@ class UserINFRest(Resource):
         user = UserINF.objects().with_id(userInfo_id);
         return mlab.item2json(user);
 
-    def put(self,userInfo_id):
+    def post(self,userInfo_id):
         parser = reqparse.RequestParser();
         parser.add_argument(name="username", type=str, location="json")
         parser.add_argument(name="address", type=str, location="json")

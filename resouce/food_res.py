@@ -62,7 +62,7 @@ class UserRestFacebookList(Resource):
 
 class UserRest(Resource):
     def get(self,user_id):
-        user = User.objects().with_id(user_id);
+        user = User.objects();
         return mlab.item2json(user);
 
     def put(self,user_id):
@@ -89,7 +89,7 @@ class UserRest(Resource):
 
 
 class UserINFRest(Resource):
-    def get(self,userInfo_id):
+    def get(self):
         user = UserINF.objects().with_id(userInfo_id);
         return mlab.item2json(user);
 

@@ -100,8 +100,8 @@
       <file leaf-file-name="food_res.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resouce/food_res.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="115" column="34" lean-forward="false" selection-start-line="115" selection-start-column="34" selection-end-line="115" selection-end-column="34" />
+            <state relative-caret-position="255">
+              <caret line="64" column="29" lean-forward="false" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -912,8 +912,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resouce/food_res.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="115" column="34" lean-forward="false" selection-start-line="115" selection-start-column="34" selection-end-line="115" selection-end-column="34" />
+        <state relative-caret-position="255">
+          <caret line="64" column="29" lean-forward="false" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
